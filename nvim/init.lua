@@ -5,7 +5,7 @@ vim.g.mapleader = ","
 
 -- General settings
 vim.wo.number = true
-vim.wo.relativenumber = true
+vim.wo.relativenumber = false
 vim.o.showcmd = true
 vim.o.showmode = true
 vim.o.ruler = true
