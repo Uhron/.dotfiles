@@ -1,5 +1,5 @@
 #! /bin/bash
-languages=`echo "python bash tmux zsh" | tr ' ' '\n'`
+languages=`echo "bash tmux zsh" | tr ' ' '\n'`
 core_utils=`echo "find tar xargs git git-commit git-rebase" | tr ' ' '\n'`
 
 selected=`printf "$languages\n$core_utils" | fzf`
