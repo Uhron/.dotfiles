@@ -20,18 +20,15 @@ require("lazy").setup({
       vim.cmd([[colorscheme onedark]])
     end,
     },
-    {"neovim/nvim-lspconfig", lazy = false},
+    {"neovim/nvim-lspconfig", lazy = false}, -- Language Server Protocol config
     {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
     {'nvim-lualine/lualine.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
-    {"ojroques/vim-oscyank", branch = "main"},
-    {"tmhedberg/SimpylFold"},
-    {"tpope/vim-fugitive"},
-    {"kkoomen/vim-doge"},
-    {"tpope/vim-commentary"},
-    {"roxma/vim-tmux-clipboard"},
-    {"rbgrouleff/bclose.vim"},
+    {"ojroques/vim-oscyank", branch = "main"}, -- allows copies terminal (OSC52) to vim
+    {"tpope/vim-fugitive"}, -- git on steroids
+    {"tpope/vim-commentary"}, -- adds commentary (:gcc to comment line, :7,17Commentary to comment range, etc)
+    {"roxma/vim-tmux-clipboard"}, -- copy from vim to tmux
     {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
-    {"easymotion/vim-easymotion"},
+    {"easymotion/vim-easymotion"}, -- vim steroids (:help easymotion.txt)
     {"junegunn/fzf"},
     {"junegunn/fzf.vim"},
     {'hrsh7th/nvim-cmp'}, -- Autocompletion plugin
@@ -39,17 +36,6 @@ require("lazy").setup({
     {'hrsh7th/cmp-path'},
     {'hrsh7th/cmp-buffer'},
     {'nvimtools/none-ls.nvim', dependencies = {'nvimtools/none-ls-extras.nvim', 'nvim-lua/plenary.nvim'}},
-    {
-        "ThePrimeagen/refactoring.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
-        config = function()
-          require("refactoring").setup()
-        end,
-    },
-    {"eandrju/cellular-automaton.nvim"},
     {
       "christoomey/vim-tmux-navigator",
       cmd = {
@@ -77,26 +63,6 @@ vim.g.oscyank_max_length = 0
 vim.g.oscyank_silent = 0
 vim.g.oscyank_trim = 1
 vim.g.oscyank_osc52 = "\x1b]52;c;%s\x07"
-
--- Cellular-automaton
-local config = {
-    fps = 50,
-    name = 'snake',
-    update = function (grid)
-        for i = 1, #grid do
-            local prev = grid[i][#(grid[i])]
-            for j = 1, #(grid[i]) do
-                grid[i][j], prev = prev, grid[i][j]
-            end
-        end
-        return true
-    end
-}
-require("cellular-automaton").register_animation(config)
-
-vim.api.nvim_set_keymap('n', '<leader>mir', ':CellularAutomaton make_it_rain<CR>j', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gol', ':CellularAutomaton game_of_life<CR>j', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>sn', ':CellularAutomaton snake<CR>j', {silent = true})
 
 -- Tree-sitter
 require'nvim-treesitter.configs'.setup {
@@ -247,12 +213,6 @@ vim.o.hidden = true
 vim.o.updatetime = 300
 vim.o.shortmess = vim.o.shortmess .. "c"
 
--- SimpylFold
-vim.g.SimpylFold_docstring_preview = 1
-
--- Doge
-vim.g.doge_doc_standard_python = 'google'
-vim.g.doge_enable_mappings = 0
 
 -- FzF
 vim.api.nvim_set_keymap('n', '<C-p>', ':Files<CR>', { noremap = true })
